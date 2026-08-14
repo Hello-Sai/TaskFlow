@@ -5,10 +5,10 @@ import TaskModal from './TaskModal';
 const PRIORITY_LABEL = { low: 'Low', medium: 'Med', high: 'High' };
 
 const COLUMN_NEXT_ACTIONS = {
-  ToDo:       [{ label: '▶', title: 'Mark In Progress', targetCol: 'InProgress', cls: 'btn-progress' }],
+  ToDo: [{ label: '▶', title: 'Mark In Progress', targetCol: 'InProgress', cls: 'btn-progress' }],
   InProgress: [
-    { label: '↩', title: 'Move to To Do',  targetCol: 'ToDo',  cls: 'btn-todo'     },
-    { label: '✓', title: 'Mark as Done',   targetCol: 'Done',  cls: 'btn-done'     },
+    { label: '↩', title: 'Move to To Do', targetCol: 'ToDo', cls: 'btn-todo' },
+    { label: '✓', title: 'Mark as Done', targetCol: 'Done', cls: 'btn-done' },
   ],
   Done: [{ label: '↩', title: 'Move to In Progress', targetCol: 'InProgress', cls: 'btn-progress' }],
 };
@@ -52,7 +52,7 @@ export default function TaskCard({ task, columns, onUpdated, onDeleted, addToast
         onClick={() => setShowEdit(true)}
       >
         {/* Tooltip shown on any card hover, not just title */}
-        <div className="task-tooltip">✎ Click to edit</div>
+        <div className="task-tooltip">✎ Click to edit/delete</div>
 
         <div className="task-label-row">
           <div className="task-title">{task.title}</div>

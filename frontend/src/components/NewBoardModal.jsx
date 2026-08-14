@@ -20,7 +20,7 @@ export default function NewBoardModal({ onClose, onCreated, addToast }) {
       const board = await createBoard(title.trim());
       onCreated(board);
     } catch (e) {
-      addToast?.('Could not create board — is the server running?', 'error');
+      addToast?.('Could not create board — server is not running', 'error');
     } finally {
       setLoading(false);
     }
