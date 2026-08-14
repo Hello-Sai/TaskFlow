@@ -1,0 +1,33 @@
+services:
+  # ── Django Backend ──────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    expose:
+      - "8000"
+    volumes:
+      # Persist SQLite DB across restarts
+      - ./backend/db.sqlite3:/app/db.sqlite3
+    environment:
+      - DEBUG=1
+      - DJANGO_SETTINGS_MODULE=config.settings
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/boards/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 15s
+
+  # ── React Frontend (nginx) ──────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

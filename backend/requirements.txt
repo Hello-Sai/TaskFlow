@@ -1,0 +1,12 @@
+# Core
+django
+djangorestframework
+
+# Production server (used on Render)
+gunicorn
+
+# Serve frontend static files from Django (optional but useful on Render)
+whitenoise
+
+# CORS headers — needed when frontend and backend are on different domains
+django-cors-headers
