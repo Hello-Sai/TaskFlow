@@ -1,0 +1,28 @@
+services:
+  # ── Backend: Django REST API ────────────────────────────────
+  - type: web
+    name: taskflow-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && python manage.py migrate && python manage.py seed_data
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DEBUG
+        value: "0"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CORS_ALLOW_ALL_ORIGINS
+        value: "0"
+      - key: CORS_ALLOWED_ORIGINS
+        value: ""   # set after frontend is deployed, e.g. https://taskflow-ui.onrender.com
+
+  # ── Frontend: React SPA (static site) ──────────────────────
+  - type: web
+    name: taskflow-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: ""   # set to https://taskflow-backend.onrender.com/api after backend deploys

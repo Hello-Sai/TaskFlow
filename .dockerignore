@@ -1,0 +1,12 @@
+# Root-level .dockerignore (used when building from project root)
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+frontend/node_modules/
+frontend/dist/
+.git/
+.gitignore
+*.md
+*.log
+.env
+.env.*
